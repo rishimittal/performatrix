@@ -1,0 +1,262 @@
+{{include 'web2py_ajax.html'}}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />		
+		<title>Performatrix | Add Details </title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {	
+				if (!($.browser.safari || $.browser.mozilla)) {
+					$("form").hide();
+					$("<div class='error' />").html("<h2>Browser Not Supported</h2>The Performatrix Dashboard utilizes cutting-edge browser technologies.<br /><br />We currently only support <ul><li>Firefox (version &gt; 3.5 recommended)</li><li>Safari (version &gt; 3 recommended)</li></ul>").appendTo('#login-content');
+				}
+			});
+		</script>
+		<style type="text/css">
+				html, body {
+					width:100%;
+					height:100%;	
+					margin:0px;
+				}
+				table {
+					width:100%;
+					height:100%;
+					border-collapse:collapse; 
+				}
+				tr.header {
+					width:100%;
+					height:20%;
+					background-image: url("{{=URL('static','images/bg-login-top.png')}}"); repeat #fff;
+					text-align:left;
+					font-size:2em;
+					font-family:"Times New Roman",Times,serif;
+				}
+				tr.dummy {
+					position: absolute;
+					border-bottom: solid 5px #545551;
+					width: 100%;
+					background: transparent;
+					z-index: 2;
+				}			
+				tr.content {
+					width:100%;
+					height:75%;
+					background-image: url("{{=URL('static','images/bg-login.png')}}"); repeat #1b1b1b;
+				}
+				td.nav {
+					width:15%;
+					background-image: url("{{=URL('static','images/bg-login.png')}}"); repeat #1b1b1b;
+					border-right-style:solid;
+					border-right-width:2px;
+					border-right-color:#FFFFFF;
+					vertical-align:top;
+                    padding-top:100px;
+				}
+				#nav_list{
+					width:150px;
+					font-family:"Times New Roman",Times,serif;
+					font-size:15px;
+					margin-bottom: 0px;
+					margin-left: -50px;
+					margin-top: -20px;
+				}
+				#nav_list ul {
+					list-style:none;
+				}
+				#nav_list ul li { 
+				}
+				#nav_list ul li a {
+					display:block;
+					text-decoration:none;
+					color:#FFFFFF;
+					background-color:#6B8E23;
+					line-height:30px;
+					border-bottom-style:solid;
+					border-bottom-width:1px;
+					border-bottom-color:#CCCCCC;
+					text-align:center;
+					width:150px;
+				}
+				#nav_list ul li a:hover {
+					background-color:#003300;
+					color:#FFFFFF;
+				}	
+				#links{
+					font-family:"Times New Roman",Times,serif;
+					font-size:15px;
+					float:right;
+				}
+
+				#links ul {
+					list-style:none;
+					text-align: right;
+				}
+					
+				#links ul li { 
+					display: inline;
+				}
+
+				#links ul li a {  
+					padding: 0em 0.5em;
+				}
+				td.con {
+					vertical-align:text-top;
+					text-align:left;
+					color:#FFFFFF;
+					width:85%;
+					background-image: url("{{=URL('static','images/bg-login.png')}}"); repeat #1b1b1b;
+					font-family:"Times New Roman",Times,serif;
+				}
+
+				tr.footer {
+					width:5%;
+					background-image: url("{{=URL('static','images/bg-login-top.png')}}"); repeat #fff;
+					text-align:center;
+					font-size:1em;
+					font-family:"Times New Roman",Times,serif;
+				}
+				input.string {
+					width: 220px;
+					position: relative;
+					right: -10px;
+					margin: 3px;
+					text-align:center;
+					-moz-border-radius: 4px;
+					-webkit-border-radius: 4px;
+					border-radius: 4px;
+					background: #fff;
+					border: solid 1px transparent;
+					color: #555;
+					padding: 8px;
+					font-size: 13px;
+				}
+				input.date {
+					width: 220px;
+					position: relative;
+					right: -10px;
+					margin: 3px;
+					text-align:center;
+					-moz-border-radius: 4px;
+					-webkit-border-radius: 4px;
+					border-radius: 4px;
+					background: #fff;
+					border: solid 1px transparent;
+					color: #555;
+					padding: 8px;
+					font-size: 13px;
+				}
+				label {
+					width: 160px;
+					float: left;
+					padding: 8px;
+					line-height: 14px;
+					margin-top: 4px;
+					margin-left: 60px;	
+				}
+				input.button {
+					position: relative;
+					right: -245px;
+					margin: 3px;
+					padding: 6px 10px;
+					color: #fff;
+					font-size: 14px;
+					background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a4d04a), to(#459300));
+					text-shadow: #050505 0 -1px 0;
+					background-color: #459300;
+					-moz-border-radius: 4px;
+					-webkit-border-radius: 4px;
+					border-radius: 4px;
+					border: solid 	1px transparent;
+					font-weight: bold;
+					cursor: pointer;
+					letter-spacing: 1px;
+				}
+			
+			input.button:hover {
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a4d04a), to(#a4d04a), color-stop(80%, #76b226));
+				text-shadow: #050505 0 -1px 2px;
+				background-color: #a4d04a;
+				color: #fff;
+			}
+			.error{
+				width: 200px;
+				position: relative;
+				right: -250px;
+				color:#fff;
+				text-align:center;
+				-moz-border-radius: 4px;
+				-webkit-border-radius: 4px;
+				border-radius: 4px;
+				background: #459300;;
+				border: solid 1px transparent;
+				padding: 8px;
+				font-size: 13px;
+			}
+			.flash{
+				position:absolute;
+				right:500px;
+				top:20px;
+				font-size:20px;
+				color:#ffffff;
+				background-color:#459300;
+				border-radius: 3px;
+				padding:10px;	
+				}
+		</style>		
+	</head>
+  
+	<body>
+		<table> 
+			<tr class="header">
+				<td colspan="2"><b><img src="{{=URL('static','images/perheadlogo.png')}}" alt="Performatrix Logo" title="Performatrix-team" /></b>
+				<div class="flash">{{=response.flash or ''}}</div>
+				<div id="links">
+					<ul>
+						<li>{{=A(IMG(_src=URL('static','images/home.png'), _alt="homeLogo"), _href=URL('eDashboard'))}}</li>
+						<li>{{=A(IMG(_src=URL('static','images/logout.png'), _alt="logoutLogo"), _href=URL('logout'))}}</li>
+					</ul>	
+				</div>
+				</td>
+			</tr>
+			<tr class = "dummy"></tr>
+			<tr class="content">
+				<td class="nav">
+					<div id="nav_list">
+						<ul>
+							<li>{{=A('Add Details', _href=URL('addDetails'))}}<br /></li>
+							<li>{{=A('Self Evaluate', _href=URL('selfEvaluate'))}}<br /></li>
+							<li>{{=A('My Performance', _href=URL('myperformance'))}}<br /></li>
+							<li>{{=A('My Skills', _href=URL('mySkill'))}}<br /></li>
+							<li>{{=A('Overall Rating', _href=URL('overallRating'))}}<br /></li>
+							{{ if flag == 1: }}
+								<li>{{=A('Rate Your Team', _href=URL('rateTeam'))}}<br /></li>
+							{{else:}}
+								{{pass}}
+							<li>{{=A('Suggestions', _href=URL('suggestions'))}}<br /></li>
+						</ul>
+					</div>
+				</td>
+				<td class="con"><br />
+				{{=form.custom.begin}}
+				<label>Employee Id :</label>{{=form.custom.widget.EmployeeId}}<br/>
+				<label>First Name :</label>{{=form.custom.widget.FirstName}}<br/>
+				<label>Last Name :</label>{{=form.custom.widget.LastName}}<br/>
+				<label>Date of Birth :</label>{{=form.custom.widget.DOB}}<br/>
+				<label>Current Position :</label>{{=form.custom.widget.CurrentPosition}}<br/>
+				<label>Proficient Skill:</label>{{=form.custom.widget.ProficientSkill}}<br/>
+				<label>Internediate Skill :</label>{{=form.custom.widget.IntermediateSkill}}<br/>
+				<label>Basic Skill :</label>{{=form.custom.widget.BasicSkill}}<br/>
+				<label>Manager Id :</label>{{=form.custom.widget.ManagerId}}<br/>
+				<label>Any Comments :</label>{{=form.custom.widget.Comments}}<br/>
+				{{=form.custom.submit}}
+				{{=form.custom.end}}
+				</td>
+			</tr>
+			<tr class = "dummy"></tr>
+			<tr class="footer">
+				<td colspan="2">&copy; IIIT Hyderabad , All Rights Reserved</td>
+			</tr>
+		</table>
+	</body>
+</html>

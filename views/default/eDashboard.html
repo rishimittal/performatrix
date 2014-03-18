@@ -1,0 +1,199 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />		
+		<title>Performatrix | Dashboard</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {	
+				if (!($.browser.safari || $.browser.mozilla)) {
+					$("form").hide();
+					$("<div class='error' />").html("<h2>Browser Not Supported</h2>The Performatrix Dashboard utilizes cutting-edge browser technologies.<br /><br />We currently only support <ul><li>Firefox (version &gt; 3.5 recommended)</li><li>Safari (version &gt; 3 recommended)</li></ul>").appendTo('#login-content');
+				}
+			});
+		</script>
+		<style type="text/css">
+				html, body {
+					width:100%;
+					height:100%;	
+					margin:0px;
+				}
+
+				table {
+					width:100%;
+					height:100%;
+					border-collapse:collapse; 
+				}
+
+				tr.header {
+					width:100%;
+					height:20%;
+					background-image: url("{{=URL('static','images/bg-login-top.png')}}"); repeat #fff;
+					text-align:left;
+					font-size:2em;
+					font-family:"Times New Roman",Times,serif;
+				}
+				.links{
+					float:right;
+				}
+				tr.dummy {
+					position: absolute;
+					border-bottom: solid 5px #545551;
+					width: 100%;
+					background: transparent;
+					z-index: 2;
+				}
+				
+				tr.content {
+					width:100%;
+					height:75%;
+					background-image: url("{{=URL('static','images/bg-login.png')}}"); repeat #1b1b1b;
+				}
+
+				td.nav {
+					width:15%;
+					background-image: url("{{=URL('static','images/bg-login.png')}}"); repeat #1b1b1b;
+					border-right-style:solid;
+					border-right-width:2px;
+					border-right-color:#FFFFFF;
+					vertical-align:top;
+                    padding-top:100px;
+				}
+
+				#nav_list{
+					width:150px;
+					font-family:"Times New Roman",Times,serif;
+					font-size:15px;
+					margin-bottom: 0px;
+					margin-left: -50px;
+					margin-top: -20px;
+				}
+
+				#nav_list ul {
+					list-style:none;
+				}
+
+				#nav_list ul li { 
+				}
+
+				#nav_list ul li a {
+					display:block;
+					text-decoration:none;
+					color:#FFFFFF;
+					background-color:#6B8E23;
+					line-height:30px;
+					border-bottom-style:solid;
+					border-bottom-width:1px;
+					border-bottom-color:#CCCCCC;
+					text-align:center;
+					width:150px;
+				}
+
+				#nav_list ul li a:hover {
+					background-color:#003300;
+					color:#FFFFFF;
+				}
+				#links{
+					font-family:"Times New Roman",Times,serif;
+					font-size:15px;
+					float:right;
+				}
+
+				#links ul {
+					list-style:none;
+					text-align: right;
+				}
+					
+				#links ul li { 
+					display: inline;
+				}
+
+				#links ul li a {  
+					padding: 0em 0.5em;
+				}
+				
+				td.con {
+					vertical-align:text-top;
+					text-align:left;
+					color:#FFFFFF;
+					width:85%;
+					background-image: url("{{=URL('static','images/bg-login.png')}}"); repeat #1b1b1b;
+					font-family:"Times New Roman",Times,serif;
+				}
+
+				tr.footer {
+					width:5%;
+					background-image: url("{{=URL('static','images/bg-login-top.png')}}"); repeat #fff;
+					text-align:center;
+					font-size:1em;
+					font-family:"Times New Roman",Times,serif;
+				}
+				
+		</style>		
+	</head>
+  
+	<body>
+		<table> 
+			<tr class="header">
+				<td colspan="2"><b><img src="{{=URL('static','images/perheadlogo.png')}}" alt="Performatrix Logo" title="Performatrix-team" /></b>
+				<div id="links">
+					<ul>
+						<li>{{=A(IMG(_src=URL('static','images/home.png'), _alt="homeLogo"), _href=URL('eDashboard'))}}</li>
+						<li>{{=A(IMG(_src=URL('static','images/logout.png'), _alt="logoutLogo"), _href=URL('logout'))}}</li>
+					</ul>	
+				</div>
+				</td>
+			</tr>
+			<tr class = "dummy"></tr>
+			<tr class="content">
+				<td class="nav">
+					<div id="nav_list">
+						<ul>
+							<li>{{=A('Add Details', _href=URL('addDetails'))}}<br /></li>
+							<li>{{=A('Self Evaluate', _href=URL('selfEvaluate'))}}<br /></li>
+							<li>{{=A('My Performance', _href=URL('myperformance'))}}<br /></li>
+							<li>{{=A('My Skills', _href=URL('mySkill'))}}<br /></li>
+							<li>{{=A('Overall Rating', _href=URL('overallRating'))}}<br /></li>
+							{{ if flag == 1: }}
+								<li>{{=A('Rate Your Team', _href=URL('rateTeam'))}}<br /></li>
+							{{else:}}
+								{{pass}}
+							<li>{{=A('Suggestions', _href=URL('suggestions'))}}<br/></li>
+						</ul>
+					</div>
+				</td>
+				<td class="con"><br /><br /><br/>&nbsp;Welcome ,&nbsp;{{=logged_first_username}}  {{=logged_last_username}}
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><b>This is your dashboard...!</b></i> 
+				</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primary objective of this application
+					is to manage your details and your performance related information , so that an effective decision about the certain features
+					such as evaluation plans , performance improvement plans could be taken by our team, which in fact improves your chances of
+					improvement and also in turn help the organization to enhance its growth.
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><b>How it Works...? </b></i> 
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Every employee after first time login , Enters his/her information
+					in the database  from the <u><b>Add details</b></u> Page link shown on the left side.Then Employee can rate himself as however he/she
+					finds himself suitable on the grounds we have asked him/her from the <u><b>Self Evaluate</b></u> page link. User can also change what
+					he/she has entered on later stage.Then after certain stage your Manager will rating you on your performance in job and other criteria,
+					based on both the evalutaion , we will be generating the final Overall evaluation page. Based on that your overall performance, the
+					administration would be taking any important decision about your bonus , apprasials and which team you are most suitable to work for.
+				</p><br />
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><b>Thank You </b></i> 
+				</p>
+				</td>
+			</tr>
+			<tr class = "dummy"></tr>
+			<tr class="footer">
+				<td colspan="2">&copy; IIIT Hyderabad , All Rights Reserved</td>
+			</tr>
+		</table>
+	</body>
+</html>
+
+	
