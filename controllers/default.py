@@ -7,7 +7,7 @@
 ########################################################################
 
 
-def index():
+de index():
 	'''Login Form generated here and passed to the index page '''
 	form=FORM(LABEL('Username:'), 
 			INPUT(_name='username', _value = '', _class = 'text-input',_required = 'on', requires=IS_NOT_EMPTY()), 
